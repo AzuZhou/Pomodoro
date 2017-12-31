@@ -1,0 +1,135 @@
+html, body {
+    padding: 0;
+    margin: 0; 
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(245,94,94);
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 85vw;
+    height: 85vh;
+    border: 1px solid rgb(245,94,94);
+    border-radius: 20px;
+    background-color: white;
+    /*background-color: rgb(255,99,71);*/
+}
+
+.settings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15vw;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.5vw;
+    height: 15vh;
+}
+
+.break {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+}
+
+#break {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#session {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.session {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+}
+
+button {
+    cursor: pointer;
+    background-color: transparent;
+    font-family: 'Quicksand', sans-serif;
+    outline: 0;
+}
+
+.settings button {
+    border: none;
+    color: rgb(245,94,94);
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
+.settings h6 {
+    margin: 0;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 40vh;
+    width: 60vw;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 6vw;
+}
+
+#trigger {
+    border: none;
+    font-size: 1.5vw;
+    color: rgb(245,94,94);
+}
+
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.time h1 {
+    height: 25vh;
+    width: 8vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+#third {
+    border: none;
+    width: 5vw;
+}
+
+#first {
+    margin-right: 1vw; 
+}
+
+#fifth {
+    margin-left: 1vw;
+}
+
+.quote {
+    font-family: 'Pacifico', cursive;
+    color: rgb(245,94,94);
+    text-align: center;
+    width: 60vw;
+    height: 20vh;
+}
+
+
+/* font-family: 'Pacifico', cursive; /*

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> Pomodoro Clock </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="settings">
+            <div class="break">
+                <h6>Break Length</h6>
+                <div id="break">
+                    <button id="break-minus">-</button>
+                    <h3>5</h3>
+                    <button id="break-plus">+</button>
+                </div>
+            </div>
+            <div class="session">
+                <h6>Session Lenght</h6>
+                <div id="session">
+                    <button id="session-minus">-</button>
+                    <h3>25</h3>
+                    <button id="session-plus">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="timer">
+            <button id="trigger">
+                <h1>Start</h1>
+            </button>
+
+            <div class="time">
+                <h1 id="first">2</h1>
+                <h1 id="second">5</h1>
+                <h1 id="third">:</h1>
+                <h1 id="forth">0</h1>
+                <h1 id="fifth">0</h1>
+            </div>
+
+        </div>
+
+        <div class="quote">
+            <h2 id="quote">Insert Quote</h2>
+            <h5 id="author">Author</h5>
+        </div>
+    </div>
+</body>
+
+</html>
