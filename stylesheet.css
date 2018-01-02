@@ -99,6 +99,7 @@ button {
     justify-content: center;
     align-items: center;
     height: 30vh;
+    width: 35vw;
 }
 
 .time h1 {
@@ -110,17 +111,17 @@ button {
     margin: 0;
 }
 
-#third {
+#colon {
     border: none;
     width: 5vw;
 }
 
-#first {
-    margin-right: 1vw; 
+#minutes {
+    margin-right: 3vw; 
 }
 
-#fifth {
-    margin-left: 1vw;
+#seconds {
+    margin-left: 3vw;
 }
 
 .quote {
