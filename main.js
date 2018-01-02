@@ -6,4 +6,4 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     document.querySelector("#trigger").onclick = function () { setTimeout(changeSeconds, 1000) };
-});
+})
