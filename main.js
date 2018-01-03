@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let interval = function () {
 
         let minutes = Number(document.getElementById("minutes").innerHTML) - 1;
-        let seconds = 59;
+        let seconds = 60;
 
         setTimeout(function () {
             document.getElementById("minutes").innerHTML = minutes;
@@ -14,15 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (minutes > 0) {
 
                 if (seconds > 0) {
-                    document.getElementById("seconds").innerHTML = seconds--;
-                    console.log(seconds)
-                } else if (seconds == 0) {
-                    document.getElementById("seconds").innerHTML = seconds;
                     seconds--;
-                    document.getElementById("minutes").innerHTML = minutes--;
+                    document.getElementById("seconds").innerHTML = seconds;
                 } else {
-                    document.getElementById("minutes").innerHTML = minutes--;
                     seconds = 59;
+                    minutes--;
+                    document.getElementById("minutes").innerHTML = minutes;
+                    document.getElementById("seconds").innerHTML = seconds;
                 }
 
             } else if (minutes == 0) {
