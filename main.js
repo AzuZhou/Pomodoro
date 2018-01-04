@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let sessionStarted = false;
     let pause = false;
-    let minutes = Number(document.getElementById("minutes").innerHTML) - 1;
-    let seconds = 60;
+    let minutes;
+    let seconds;
     let lastMin;
     let lastSec;
     let min;
@@ -41,16 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    let interval = function () {
+    let startInterval = function (minutes, seconds) {
 
-        setTimeout(function () {
-            return document.getElementById("minutes").innerHTML = minutes;
-        }, 1000)
-
-        let currentInterval = setInterval(function () {
+        let theInterval = setInterval(function () {
 
             if (pause) {
-                clearInterval(currentInterval);
+                clearInterval(theInterval);
             } else {
                 if (minutes > 0) {
                     if (seconds > 0) {
@@ -60,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         minutes--;
                     }
                 } else if (minutes == 0) {
-                    (seconds < 0) ? clearInterval(currentInterval) : document.getElementById("seconds").innerHTML = seconds--;
+                    (seconds < 0) ? clearInterval(theInterval) : document.getElementById("seconds").innerHTML = seconds--;
                 }
             }
 
@@ -71,37 +67,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
             , 1000);
+
+    }
+
+    let interval = function () {
+
+        setTimeout(function () {
+            return document.getElementById("minutes").innerHTML = minutes;
+        }, 1000)
+
+        minutes = Number(document.getElementById("minutes").innerHTML) - 1;
+        seconds = 60;
+
+        startInterval(minutes, seconds);
     };
 
     let newInterval = function () {
-        lastMin = Number(document.getElementById("minutes").innerHTML);
-        lastSec = Number(document.getElementById("seconds").innerHTML);
+
         minutes = lastMin;
         seconds = lastSec;
 
-        let otherInterval = setInterval(function () {
-
-            if (pause) {
-                clearInterval(otherInterval);
-            } else {
-                if (minutes > 0) {
-                    if (seconds > 0) {
-                        seconds--;
-                    } else {
-                        seconds = 59;
-                        minutes--;
-                    }
-                } else if (minutes == 0) {
-                    (seconds < 0) ? clearInterval(currentInterval) : document.getElementById("seconds").innerHTML = seconds--;
-                }
-            }
-
-            lastMin = minutes;
-            lastSec = seconds;
-
-            showTime(lastMin, lastSec);
-
-        }, 1000)
+        startInterval(minutes, seconds);
     };
 
     let startSession = function () {
@@ -125,5 +111,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 })
 
-/*
-    */
