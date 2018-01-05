@@ -172,6 +172,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let min;
     let sec;
     let counter = 1;
+    let defaultBreak;
+    let defaultSession;
 
     let generateQuote = function () {
         randomNumber = Math.floor(Math.random() * quotes.length);
@@ -292,5 +294,45 @@ document.addEventListener('DOMContentLoaded', function () {
     let start = document.getElementById("trigger").addEventListener('click', startSession);
     let count = document.getElementById("trigger").addEventListener('click', clickCounter);
 
-})
+    if (document.getElementById("minutes").innerHTML.length == 1) {
+        document.getElementById("minutes").innerHTML = "0" + document.getElementById("minutes").innerHTML;
+    }
 
+    defaultBreak = Number(document.getElementById("default-break").innerHTML);
+    defaultSession = Number(document.getElementById("default-session").innerHTML);
+
+    let breakMinus = function () {
+        if (defaultBreak > 1) {
+            defaultBreak--;
+            document.getElementById("default-break").innerHTML = defaultBreak;
+        }
+    }
+
+    let breakPlus = function () {
+        if (defaultBreak < 59) {
+            defaultBreak++;
+            document.getElementById("default-break").innerHTML = defaultBreak;
+        }
+    }
+
+    let sessionMinus = function () {
+        if (defaultSession > 1) {
+            defaultSession--;
+            document.getElementById("default-session").innerHTML = defaultSession;
+        }
+    }
+
+    let sessionPlus = function () {
+        if (defaultSession < 59) {
+            defaultSession++;
+            document.getElementById("default-session").innerHTML = defaultSession;
+        }
+    }
+
+    document.getElementById("break-minus").onclick = breakMinus;
+    document.getElementById("break-plus").onclick = breakPlus;
+    document.getElementById("session-minus").onclick = sessionMinus;
+    document.getElementById("session-plus").onclick = sessionPlus;
+
+
+})
