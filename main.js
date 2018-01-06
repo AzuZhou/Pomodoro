@@ -176,15 +176,19 @@ document.addEventListener('DOMContentLoaded', function () {
     let defaultSession = Number(document.getElementById("default-session").innerHTML);
     let finished = false;
     let sessionType;
+    let firstCicle = 1;
 
-    if (document.getElementById("minutes").innerHTML.length == 1) {
-        document.getElementById("minutes").innerHTML = "0" + document.getElementById("minutes").innerHTML;
+    let correct = function () {
+        if (document.getElementById("minutes").innerHTML.length == 1) {
+            document.getElementById("minutes").innerHTML = "0" + document.getElementById("minutes").innerHTML;
+        }
     }
 
     let breakMinus = function () {
         if (defaultBreak > 1) {
             defaultBreak--;
             document.getElementById("default-break").innerHTML = defaultBreak;
+            correct();
         }
     }
 
@@ -192,6 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (defaultBreak < 59) {
             defaultBreak++;
             document.getElementById("default-break").innerHTML = defaultBreak;
+            correct();
         }
     }
 
@@ -201,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("default-session").innerHTML = defaultSession;
             document.getElementById("minutes").innerHTML = document.getElementById("default-session").innerHTML;
             minutes = Number(document.getElementById("default-session").innerHTML) - 1;
+            correct();
         }
     }
 
@@ -210,6 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("default-session").innerHTML = defaultSession;
             document.getElementById("minutes").innerHTML = document.getElementById("default-session").innerHTML;
             minutes = Number(document.getElementById("default-session").innerHTML) - 1;
+            correct();
         }
     }
 
@@ -217,6 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("break-plus").onclick = breakPlus;
     document.getElementById("session-minus").onclick = sessionMinus;
     document.getElementById("session-plus").onclick = sessionPlus;
+
 
     let generateQuote = function () {
         randomNumber = Math.floor(Math.random() * quotes.length);
@@ -341,8 +349,6 @@ document.addEventListener('DOMContentLoaded', function () {
         reset();
     }
 
-    let firstCicle = 1;
-
     let start = function () {
 
         if (finished) {
@@ -372,6 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (firstCicle) {
                 document.getElementById("session-plus").disabled = true;
                 document.getElementById("session-minus").disabled = true;
+                firstCircle = 0;
             }
             document.getElementById("message").innerHTML = "Pause";
             sessionStarted = true;
