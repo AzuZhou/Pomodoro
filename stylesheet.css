@@ -93,6 +93,7 @@ button {
     border: none;
     font-size: 1.5vw;
     color: rgb(245,94,94);
+    margin-bottom: 6vh;
 }
 
 .time {

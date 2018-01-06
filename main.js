@@ -165,15 +165,58 @@ document.addEventListener('DOMContentLoaded', function () {
     let author;
     let sessionStarted = false;
     let pause = false;
-    let minutes;
-    let seconds;
+    let minutes = Number(document.getElementById("default-session").innerHTML) - 1;
+    let seconds = 60;
     let lastMin;
     let lastSec;
     let min;
     let sec;
     let counter = 1;
-    let defaultBreak;
-    let defaultSession;
+    let defaultBreak = Number(document.getElementById("default-break").innerHTML);
+    let defaultSession = Number(document.getElementById("default-session").innerHTML);
+    let finished = false;
+    let sessionType;
+
+    if (document.getElementById("minutes").innerHTML.length == 1) {
+        document.getElementById("minutes").innerHTML = "0" + document.getElementById("minutes").innerHTML;
+    }
+
+    let breakMinus = function () {
+        if (defaultBreak > 1) {
+            defaultBreak--;
+            document.getElementById("default-break").innerHTML = defaultBreak;
+        }
+    }
+
+    let breakPlus = function () {
+        if (defaultBreak < 59) {
+            defaultBreak++;
+            document.getElementById("default-break").innerHTML = defaultBreak;
+        }
+    }
+
+    let sessionMinus = function () {
+        if (defaultSession > 1) {
+            defaultSession--;
+            document.getElementById("default-session").innerHTML = defaultSession;
+            document.getElementById("minutes").innerHTML = document.getElementById("default-session").innerHTML;
+            minutes = Number(document.getElementById("default-session").innerHTML) - 1;
+        }
+    }
+
+    let sessionPlus = function () {
+        if (defaultSession < 59) {
+            defaultSession++;
+            document.getElementById("default-session").innerHTML = defaultSession;
+            document.getElementById("minutes").innerHTML = document.getElementById("default-session").innerHTML;
+            minutes = Number(document.getElementById("default-session").innerHTML) - 1;
+        }
+    }
+
+    document.getElementById("break-minus").onclick = breakMinus;
+    document.getElementById("break-plus").onclick = breakPlus;
+    document.getElementById("session-minus").onclick = sessionMinus;
+    document.getElementById("session-plus").onclick = sessionPlus;
 
     let generateQuote = function () {
         randomNumber = Math.floor(Math.random() * quotes.length);
@@ -233,8 +276,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         generateQuote();
                         document.getElementsByClassName("time")[0].style.display = "none";
                         document.getElementById("trigger").style.display = "none";
-                        document.getElementById("start-break").style.display = "block";
-                        document.getElementById("start-session").style.display = "block";
+                        document.getElementById("start-break").style.display = "flex";
+                        document.getElementById("start-session").style.display = "flex";
+                        finished = true;
+                        document.getElementById("session-plus").disabled = false;
+                        document.getElementById("session-minus").disabled = false;
                         clearInterval(theInterval);
                     } else {
                         document.getElementById("seconds").innerHTML = seconds--;
@@ -258,8 +304,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return document.getElementById("minutes").innerHTML = minutes;
         }, 1000)
 
-        minutes = Number(document.getElementById("minutes").innerHTML) - 1;
-        seconds = 60;
 
         startInterval(minutes, seconds);
     };
@@ -272,7 +316,47 @@ document.addEventListener('DOMContentLoaded', function () {
         startInterval(minutes, seconds);
     };
 
+    let reset = function () {
+        minutes = document.getElementById("minutes").innerHTML - 1;
+        document.getElementsByClassName("time")[0].style.display = "flex";
+        document.getElementById("trigger").style.display = "flex";
+        document.getElementById("start-break").style.display = "none";
+        document.getElementById("start-session").style.display = "none";
+        document.getElementById("quote").innerHTML = "";
+        document.getElementById("author").innerHTML = "";
+        counter = 1;
+        pause = false;
+        sessionStarted = false;
+        finished = false;
+        seconds = 60;
+    }
+
+    let startBreak = function () {
+        document.getElementById("minutes").innerHTML = document.getElementById("default-break").innerHTML;
+        reset();
+    }
+
     let startSession = function () {
+        document.getElementById("minutes").innerHTML = document.getElementById("default-session").innerHTML;
+        reset();
+    }
+
+    let firstCicle = 1;
+
+    let start = function () {
+
+        if (finished) {
+            if (sessionType == "break") {
+                startBreak();
+            }
+            if (sessionType == "session") {
+                startSession();
+            }
+        }
+
+        if (document.getElementById("minutes").innerHTML.length == 1) {
+            document.getElementById("minutes").innerHTML = "0" + document.getElementById("minutes").innerHTML;
+        }
 
         if (sessionStarted) {
             if (resume()) {
@@ -285,54 +369,32 @@ document.addEventListener('DOMContentLoaded', function () {
                 newInterval();
             }
         } else {
+            if (firstCicle) {
+                document.getElementById("session-plus").disabled = true;
+                document.getElementById("session-minus").disabled = true;
+            }
             document.getElementById("message").innerHTML = "Pause";
             sessionStarted = true;
             interval();
         }
     };
 
-    let start = document.getElementById("trigger").addEventListener('click', startSession);
+
+    let itIsASession = function () {
+        sessionType = "session";
+    }
+
+    let itIsABreak = function () {
+        sessionType = "break";
+    }
+
+    let begin = document.getElementById("trigger").addEventListener('click', start);
     let count = document.getElementById("trigger").addEventListener('click', clickCounter);
-
-    if (document.getElementById("minutes").innerHTML.length == 1) {
-        document.getElementById("minutes").innerHTML = "0" + document.getElementById("minutes").innerHTML;
-    }
-
-    defaultBreak = Number(document.getElementById("default-break").innerHTML);
-    defaultSession = Number(document.getElementById("default-session").innerHTML);
-
-    let breakMinus = function () {
-        if (defaultBreak > 1) {
-            defaultBreak--;
-            document.getElementById("default-break").innerHTML = defaultBreak;
-        }
-    }
-
-    let breakPlus = function () {
-        if (defaultBreak < 59) {
-            defaultBreak++;
-            document.getElementById("default-break").innerHTML = defaultBreak;
-        }
-    }
-
-    let sessionMinus = function () {
-        if (defaultSession > 1) {
-            defaultSession--;
-            document.getElementById("default-session").innerHTML = defaultSession;
-        }
-    }
-
-    let sessionPlus = function () {
-        if (defaultSession < 59) {
-            defaultSession++;
-            document.getElementById("default-session").innerHTML = defaultSession;
-        }
-    }
-
-    document.getElementById("break-minus").onclick = breakMinus;
-    document.getElementById("break-plus").onclick = breakPlus;
-    document.getElementById("session-minus").onclick = sessionMinus;
-    document.getElementById("session-plus").onclick = sessionPlus;
-
+    let ifBreak = document.getElementById("start-break").addEventListener('click', itIsABreak);
+    let breakStart = document.getElementById("start-break").addEventListener('click', start);
+    let breakClickCounter = document.getElementById("start-break").addEventListener('click', clickCounter);
+    let ifSession = document.getElementById("start-session").addEventListener('click', itIsASession);
+    let sessionStart = document.getElementById("start-session").addEventListener('click', start);
+    let sessionClickCounter = document.getElementById("start-session").addEventListener('click', clickCounter);
 
 })
